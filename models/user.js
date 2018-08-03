@@ -24,26 +24,3 @@ const userSchema = new Schema({
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
-
-
-Reservations model
-
-```
-startdate: string // required
-enddate: string // required
-apartment: objectid // required
-totalPrice
-user
-status
-reservation code
-
-```
-Apartments model
-
-```
-name: string // required
-rooms: string // required
-capacity: string // required
-price: number // required
-
-```
