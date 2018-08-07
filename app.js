@@ -19,7 +19,7 @@ const booking = require('./routes/bookings');
 /* database */
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/db-juliosBnB', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
