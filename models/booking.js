@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
-const reservationSchema = new Schema({
+const bookingSchema = new Schema({
   startdate: {
     type: Date,
     required: true
@@ -31,7 +31,7 @@ const reservationSchema = new Schema({
     type: Boolean,
     required: true
   },
-  reservationcode: {
+  bookingcode: {
     type: String,
     required: true,
     unique: true
@@ -40,6 +40,6 @@ const reservationSchema = new Schema({
   timestamps: true
 });
 
-const Reservation = mongoose.model('Reservation', reservationSchema);
+const Booking = mongoose.model('Booking', bookingSchema);
 
-module.exports = Reservation;
+module.exports = Booking;
