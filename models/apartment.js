@@ -16,6 +16,14 @@ const apartmentSchema = new Schema({
     type: Number,
     required: true
   },
+  details: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  },
   nightlyprice: {
     type: Number,
     required: true

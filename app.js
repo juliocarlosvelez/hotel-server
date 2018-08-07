@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -8,27 +10,24 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
 
-const auth = require('./routes/auth');
-
 const app = express();
+
+// Require the routes //
+const apartment = require('./routes/apartments');
+const booking = require('./routes/bookings');
 
 /* database */
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/database-name', {
+mongoose.connect('mongodb://localhost/db-juliosBnB', {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
 
 /* middlewares */
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:4200']
+  origin: [process.env.CLIENT_URL]
 }));
 
 app.use(session({
@@ -44,14 +43,21 @@ app.use(session({
   }
 }));
 
-/* routes */
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-app.use('/auth', auth);
+/* routes */
+app.use('/apartments', apartment);
+app.use('/bookings', booking);
 
 /* Error Handling */
 
 /* catch 404 and forward to error handler */
+
 app.use((req, res, next) => {
+  // throw new Error('I made an error');
   res.status(404).json({code: 'not found'});
 });
 
