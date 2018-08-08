@@ -5,20 +5,19 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const bookingSchema = new Schema({
-  startdate: {
+  checkIn: {
     type: Date,
     required: true
   },
-  enddate: {
+  checkOut: {
     type: Date,
     required: true
   },
   apartment: {
-    type: ObjectId,
-    ref: 'Apartment',
+    type: String,
     required: true
   },
-  totalprice: {
+  totalPrice: {
     type: Number,
     required: true
   },
@@ -29,12 +28,11 @@ const bookingSchema = new Schema({
   },
   active: {
     type: Boolean,
-    required: true
+    default: true
   },
-  bookingcode: {
-    type: String,
-    required: true,
-    unique: true
+  bookingCode: {
+    type: Number,
+    required: true
   }
 }, {
   timestamps: true

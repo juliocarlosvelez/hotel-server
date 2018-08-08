@@ -17,4 +17,15 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+router.post('/specific', (req, res, next) => {
+  const apartment = req.body.apartment;
+  Apartment.findOne({ name: apartment })
+    .then((oneApartment) => {
+      if (oneApartment) {
+        return res.json(apartment);
+      }
+    })
+    .catch(next);
+});
+
 module.exports = router;
